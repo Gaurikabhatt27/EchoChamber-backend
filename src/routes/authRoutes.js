@@ -1,6 +1,6 @@
-const express = require('express');
-const { check, validationResult } = require('express-validator');
-const authController = require('../controllers/authController');
+import express from 'express';
+import { check, validationResult } from 'express-validator';
+import * as authController from '../controllers/authController.js';
 
 const router = express.Router();
 
@@ -12,11 +12,13 @@ const validateRegister = [
 
 const checkValidation = (req, res, next) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   next();
 };
 
 router.post('/register', validateRegister, checkValidation, authController.register);
 router.post('/login', authController.login);
 
-module.exports = router;
+export default router;
