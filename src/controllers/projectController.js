@@ -1,6 +1,6 @@
-const projectService = require('../services/projectService');
+import * as projectService from '../services/projectService.js';
 
-const create = async (req, res) => {
+export const create = async (req, res) => {
   try {
     const projectData = { ...req.body, creator: req.user.id };
     const project = await projectService.createProject(projectData);
@@ -10,7 +10,7 @@ const create = async (req, res) => {
   }
 };
 
-const getAll = async (req, res) => {
+export const getAll = async (req, res) => {
   try {
     const projects = await projectService.getAllProjects();
     res.status(200).json(projects);
@@ -18,5 +18,3 @@ const getAll = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-module.exports = { create, getAll };
