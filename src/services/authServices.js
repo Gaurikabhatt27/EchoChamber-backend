@@ -1,4 +1,4 @@
-import User from '../models/User.js';
+import User from '../models/Users.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
@@ -18,9 +18,9 @@ export const loginUser = async (email, password) => {
   if (!isMatch) throw new Error('Invalid credentials');
 
   const token = jwt.sign(
-    { id: user._id, role: user.role }, 
-    process.env.JWT_SECRET, 
-    { expiresIn: process.env.JWT_EXPIRE } 
+    { id: user._id, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRE }
   );
 
   return { user, token };
