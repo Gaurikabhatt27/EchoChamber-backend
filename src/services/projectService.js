@@ -1,12 +1,10 @@
-const Project = require('../models/Project');
+import Project from '../models/Project.js';
 
-const createProject = async (projectData) => {
+export const createProject = async (projectData) => {
   const project = new Project(projectData);
   return await project.save();
 };
 
-const getAllProjects = async () => {
+export const getAllProjects = async () => {
   return await Project.find().populate('creator', 'name');
 };
-
-module.exports = { createProject, getAllProjects };

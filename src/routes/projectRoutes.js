@@ -1,7 +1,7 @@
-const express = require('express');
-const { check, validationResult } = require('express-validator');
-const projectController = require('../controllers/projectController');
-const { protect } = require('../middlewares/authMiddleware');
+import express from 'express';
+import { check, validationResult } from 'express-validator';
+import * as projectController from '../controllers/projectController.js';
+import { protect } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -18,4 +18,4 @@ const validateProject = [
 router.post('/', protect, validateProject, projectController.create);
 router.get('/', protect, projectController.getAll);
 
-module.exports = router;
+export default router;
