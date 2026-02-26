@@ -1,6 +1,6 @@
-const projectService = require('../services/projectService');
+import * as projectService from '../services/projectService.js';
 
-const create = async (req, res) => {
+export const create = async (req, res) => {
   try {
     const projectData = { ...req.body, creator: req.user.id };
     const project = await projectService.createProject(projectData);
@@ -10,7 +10,7 @@ const create = async (req, res) => {
   }
 };
 
-const getAll = async (req, res) => {
+export const getAll = async (req, res) => {
   try {
     const { search, sortBy } = req.query;
     const projects = await projectService.getAllProjects({ search, sortBy });
