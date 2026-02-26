@@ -1,5 +1,11 @@
+<<<<<<< Updated upstream
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
+=======
+import User from '../models/Users.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+>>>>>>> Stashed changes
 
 const registerUser = async (userData) => {
   const existingUser = await User.findOne({ email: userData.email });
