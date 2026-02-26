@@ -3,6 +3,9 @@ import { check } from 'express-validator';
 import * as projectController from '../controllers/projectController.js';
 import { protect } from '../middlewares/authMiddleware.js';
 import { validateRequest } from '../middlewares/validateRequest.js';
+import { check, validationResult } from 'express-validator';
+import * as projectController from '../controllers/projectController.js';
+import { protect } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
