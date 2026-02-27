@@ -36,3 +36,26 @@ export const voteProject = async (req, res) => {
     }
   }
 };
+
+export const addComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { text, parentCommentId } = req.body;
+    const userId = req.user.id;
+
+    const comment = await projectService.addComment(id, text, userId, parentCommentId);
+    res.status(201).json(comment);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const getComments = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const comments = await projectService.getCommentsForProject(id);
+    res.status(200).json(comments);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
