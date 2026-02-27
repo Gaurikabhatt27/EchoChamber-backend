@@ -1,3 +1,4 @@
+import * as authService from '../services/authServices.js';
 
 export const register = async (req, res) => {
   try {
@@ -15,5 +16,14 @@ export const login = async (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     res.status(401).json({ error: error.message });
+  }
+};
+
+export const getLeaderboard = async (req, res) => {
+  try {
+    const leaderboard = await authService.getLeaderboard();
+    res.status(200).json(leaderboard);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
