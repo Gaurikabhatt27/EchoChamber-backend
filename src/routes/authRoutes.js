@@ -14,5 +14,6 @@ const validateRegister = [
 
 router.post('/register', validateRegister, authController.register);
 router.post('/login', authController.login);
+router.get('/leaderboard', authController.getLeaderboard);
 
 export default router;

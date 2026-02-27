@@ -25,3 +25,11 @@ export const loginUser = async (email, password) => {
 
   return { user, token };
 };
+
+export const getLeaderboard = async () => {
+  // Fetch top 10 users sorted by reputationScore descending
+  return await User.find()
+    .select('name reputationScore createdAt')
+    .sort({ reputationScore: -1 })
+    .limit(10);
+};

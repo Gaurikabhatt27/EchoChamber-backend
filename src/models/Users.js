@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['Admin', 'User'],
     default: 'User'
+  },
+  reputationScore: {
+    type: Number,
+    default: 0
   }
 }, { timestamps: true });
 
