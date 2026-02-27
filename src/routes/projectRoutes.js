@@ -22,4 +22,11 @@ router.post('/:id/vote', protect, [
   }
 ], projectController.voteProject);
 
+// Comment routes
+router.post('/:id/comments', protect, [
+  check('text', 'Comment text is required').not().isEmpty()
+], validateRequest, projectController.addComment);
+
+router.get('/:id/comments', projectController.getComments);
+
 export default router;

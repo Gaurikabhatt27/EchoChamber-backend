@@ -86,3 +86,23 @@ export const voteOnProject = async (projectId, userId, voteType) => {
 
   return project;
 };
+
+import Comment from '../models/Comment.js';
+
+export const addComment = async (projectId, text, authorId, parentCommentId = null) => {
+  const comment = new Comment({
+    text,
+    author: authorId,
+    project: projectId,
+    parentComment: parentCommentId || null
+  });
+  
+  await comment.save();
+  return await comment.populate('author', 'name reputationScore');
+};
+
+export const getCommentsForProject = async (projectId) => {
+  return await Comment.find({ project: projectId })
+    .populate('author', 'name reputationScore')
+    .sort({ createdAt: 1 }); // Oldest first (top down reading flow)
+};
