@@ -2,7 +2,7 @@ import Project from '../models/Project.js';
 import User from '../models/Users.js';
 import Task from '../models/Task.js';
 import { GoogleGenAI } from '@google/genai';
-// import { isContentSafe } from './aiModerationService.js';
+import { isContentSafe } from './aiModerationService.js';
 
 export const createProject = async (projectData) => {
   const project = new Project(projectData);
@@ -97,8 +97,7 @@ import Comment from '../models/Comment.js';
 
 export const addComment = async (projectId, text, authorId, parentCommentId = null) => {
   // Pass the comment text through the GenAI Content Moderator
-  // const isSafe = await isContentSafe(text);
-  const isSafe = true; // Temporarily mocked due to missing file
+  const isSafe = await isContentSafe(text);
   if (!isSafe) {
     throw new Error('Your comment violates our community guidelines (hate speech, severe profanity, or harassment) and cannot be posted.');
   }
