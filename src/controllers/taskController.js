@@ -1,9 +1,14 @@
 import * as taskService from '../services/taskService.js';
+import { io } from '../server.js';
 
 export const postArgument = async (req, res) => {
   try {
     const argumentData = { ...req.body, user: req.user.id };
     const task = await taskService.createArgument(argumentData);
+    
+    // Broadcast the new argument to everyone viewing this project
+    io.to(task.project.toString()).emit('new_argument', task);
+    
     res.status(201).json(task);
   } catch (error) {
     res.status(400).json({ error: error.message });

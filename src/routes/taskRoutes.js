@@ -14,6 +14,6 @@ const validateTask = [
 ];
 
 router.post('/', protect, validateTask, taskController.postArgument);
-router.get('/:projectId', protect, taskController.getRoomDebate);
+router.get('/:projectId', taskController.getRoomDebate);
 
 export default router;
