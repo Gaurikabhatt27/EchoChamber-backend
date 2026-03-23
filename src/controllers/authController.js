@@ -5,6 +5,7 @@ export const register = async (req, res) => {
     const user = await authService.registerUser(req.body);
     res.status(201).json({ message: 'User registered successfully', user });
   } catch (error) {
+    console.error(error.stack);
     res.status(400).json({ error: error.message });
   }
 };
